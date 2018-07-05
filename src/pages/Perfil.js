@@ -192,6 +192,7 @@ class Perfil extends React.Component {
                                 <div className="col-sm-12">
                                      <a className="btn btn-default"
                                         name="enviar"
+                                        >
                                         Salvar
                                     </a>
                                 </div>
