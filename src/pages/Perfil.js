@@ -1,5 +1,8 @@
 import React from 'react';
 
+import { DataTable } from 'primereact/components/datatable/DataTable';
+import { Column } from 'primereact/components/column/Column';
+
 class Perfil extends React.Component {
 
 
@@ -77,6 +80,13 @@ class Perfil extends React.Component {
                         this.mostrarErro('Senha incorreta! Informe novamente!');
                     }
                     this.ocultarAjaxLoader();
+
+                    const responsePalpites = await fetch('http://localhost:8080/BolaoDaCopaV2/webresources/palpite/usuario?email=' + this.state.email);
+                    var contentTypePalpites = responsePalpites.headers.get("content-type");
+                    if (contentTypePalpites && contentTypePalpites.includes("application/json")) {
+                        const palpitesJson = await responsePalpites.json();
+                        this.setState({ palpites: palpitesJson });
+                    }
                 } else {
                     this.mostrarInfo('E-mail não encontrado! Tente novamente.');
                 }
@@ -224,6 +234,15 @@ class Perfil extends React.Component {
                                         >
                                         Salvar
                                     </a>
+                                </div>
+                                <h4 className={(this.state.mostrarDetalhes ? "": "hidden")}>Meus palpites</h4>
+                                <div className="form-group">
+                                    <div className="content-section implementation">
+                                    <DataTable value={this.state.palpites} paginator={true} rows={10}>
+                                        <Column field="campeao" header="Campeão" />
+                                        <Column field="vice" header="Vice" />
+                                    </DataTable>
+                                </div>
                                 </div>
                             </div>
                         </form>
