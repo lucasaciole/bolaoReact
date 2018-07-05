@@ -84,9 +84,37 @@ class Perfil extends React.Component {
                 this.mostrarErro('Ocorreu um problema!');
                 console.log(e);
             }
+            this.ocultarAjaxLoader();
         }
     }
 
+    async handleEditarUsuarioClicked() {
+        this.mostrarAjaxLoader();
+        const novoUsuario = {
+                    id: this.state.id,
+                    nome: this.state.nome,
+                    email: this.state.email,
+                    telefone: this.state.telefone,
+                    dataDeNascimento: new Date(this.state.dataDeNascimento),
+                };
+        if (this.state.novaSenha) {
+            novoUsuario.senha = this.state.novaSenha
+        } else {
+            novoUsuario.senha = this.state.senha
+        }
+        const response = await fetch('http://localhost:8080/BolaoDaCopaV2/webresources/usuario/' + this.state.id, {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            method: 'PUT',
+            body: JSON.stringify(novoUsuario),
+        })
+        const usuarioAlterado = await response.json();
+        if (usuarioAlterado) {
+            this.mostrarSucesso("Usuário alterado com sucesso!")
+        }
+        this.ocultarAjaxLoader();
+    }
 
     render() {
         return (
@@ -192,6 +220,7 @@ class Perfil extends React.Component {
                                 <div className="col-sm-12">
                                      <a className="btn btn-default"
                                         name="enviar"
+                                        onClick={() => this.handleEditarUsuarioClicked()}
                                         >
                                         Salvar
                                     </a>
@@ -200,6 +229,7 @@ class Perfil extends React.Component {
                         </form>
                     </div>
                 </div>
+                {this.state.mostrarAjaxLoader && (<div className='ajaxLoaderClass' />)}
             </div>
         );
     }
