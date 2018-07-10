@@ -147,7 +147,7 @@ class PalpiteForm extends React.Component {
                     dataDeNascimento: d.toISOString().slice(0, 10),
                 });
                 
-                userPalpiteQtd = returnQuantidadePalpitesPorEmail(this.state.usuarioEncontrado.email);
+                const userPalpiteQtd = await fetch('http://localhost:8080/BolaoDaCopaV2/webresources/palpite/quantidade?email=' + this.state.email);
                 if(userPalpiteQtd < 5){
                     this.setState({ estado: NovoPalpiteMaquinaEstados.usuarioExistenteSenhaCorreta() });
                     this.mostrarSucesso('Senha correta! Informe seu palpite!');
