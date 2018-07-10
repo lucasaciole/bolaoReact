@@ -136,7 +136,7 @@ class PalpiteForm extends React.Component {
         this.ocultarAjaxLoader();
     }
 
-    handleSenhaChanged() {
+    async handleSenhaChanged() {
         if (this.validarCampo({ nome: 'senha' }) !== '') return;
         if (!this.state.estado.eventoSenhaDesabilitado) {
             if (this.state.senha === this.state.usuarioEncontrado.senha) {
@@ -146,8 +146,17 @@ class PalpiteForm extends React.Component {
                     telefone: this.state.usuarioEncontrado.telefone,
                     dataDeNascimento: d.toISOString().slice(0, 10),
                 });
-                this.setState({ estado: NovoPalpiteMaquinaEstados.usuarioExistenteSenhaCorreta() });
-                this.mostrarSucesso('Senha correta! Informe seu palpite!');
+                
+                userPalpiteQtd = returnQuantidadePalpitesPorEmail(this.state.usuarioEncontrado.email);
+                if(userPalpiteQtd < 5){
+                    this.setState({ estado: NovoPalpiteMaquinaEstados.usuarioExistenteSenhaCorreta() });
+                    this.mostrarSucesso('Senha correta! Informe seu palpite!');
+                }
+                else{
+                    this.setState({ estado: NovoPalpiteMaquinaEstados.usuarioExistenteSenhaCorretaLimiteExcedido()});
+                    this.mostrarErro('Limite de palpites excedido! Não se pode ter mais de 5 palpites')
+                }
+                
 
 
             } else {

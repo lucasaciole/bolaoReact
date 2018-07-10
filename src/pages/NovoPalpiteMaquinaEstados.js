@@ -41,6 +41,19 @@ class NovoPalpiteMaquinaEstados {
             botaoConfirmarPalpiteVisivel: false,
         };
     }
+    
+    static usuarioExistenteSenhaCorretaLimiteExcedido() {
+        return {
+            campoSenhaDesabilitado: false,
+            eventoSenhaDesabilitado: false,
+            camposDadosPessoaisDesabilitados: true,
+            camposDadosPalpiteDesabilitados: true,
+            camposDadosPalpiteDestaque: false,
+            botaoEnvioDesabilitado: true,
+            campoConfirmacaoSenhaVisivel: false,
+            botaoConfirmarPalpiteVisivel: false,
+        };
+    }
 
 
     static usuarioExistenteSenhaIncorreta() {
