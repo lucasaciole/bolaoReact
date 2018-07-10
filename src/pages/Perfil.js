@@ -130,122 +130,133 @@ class Perfil extends React.Component {
         return (
             <div className="row">
                 <div className="col-lg-12 text-center">
-                    <h4 className={(this.state.mostrarDetalhes ? "": "hidden")}>Editar Informações</h4>
-                    <div className="loginForm">
-                        <form className="form-horizontal" name="formPalpite">
-                            <div className={this.state.mensagemClassName}>
-                                {this.state.mensagem}
-                            </div>
-                            <div className="form-group">
-                                <label className="col-sm-2 control-label" htmlFor="email">E-mail</label>
-                                <div className="col-sm-4">
-                                    <input type="email"
-                                        className="form-control"
-                                        name="email"
-                                        label="E-mail"
-                                        value={this.state.email}
-                                        onChange={(event) => this.handleUserInput(event)}>
-                                    </input>
-                                    <span className="text text-danger">{this.state.mensagensValidacao['email']}</span>
-                                </div>
-                                <label className={"col-sm-2 control-label " + (this.state.mostrarLogin ? "": "hidden")} htmlFor="senha">Senha</label>
-                                <div className={"col-sm-4 " + (this.state.mostrarLogin ? "": "hidden")}>
-                                    <input type="password"
-                                        className="form-control"
-                                        name="senha"
-                                        label="Senha"
-                                        value={this.state.senha}
-                                        onChange={(event) => this.handleUserInput(event)}>
-                                    </input>
-                                    <span className="text text-danger">{this.state.mensagensValidacao['senha']}</span>
-                                </div>
-                            </div>
+                    <div className={(this.state.mostrarDetalhes ? "": "hidden")}>
+                        <ul id="tabs" className="nav nav-tabs" data-tabs="tabs">
+                            <li className="active"><a href="#meusDados" data-toggle="tab">Meus dados</a></li>
+                            <li><a href="#meusPalpites" data-toggle="tab">Meus Palpites</a></li>
+                        </ul>
+                    </div>
+                    <div id="tabNavigator" className="tab-content">
+                        <div className="tab-pane active" id="meusDados">
+                            <h4 className={(this.state.mostrarDetalhes ? "": "hidden")}>Editar Informações</h4> 
+                            <div className="loginForm">
+                                <form className="form-horizontal" name="formPalpite">
+                                    <div className={this.state.mensagemClassName}>
+                                        {this.state.mensagem}
+                                    </div>
+                                    <div className="form-group">
+                                        <label className="col-sm-2 control-label" htmlFor="email">E-mail</label>
+                                        <div className="col-sm-4">
+                                            <input type="email"
+                                                className="form-control"
+                                                name="email"
+                                                label="E-mail"
+                                                value={this.state.email}
+                                                onChange={(event) => this.handleUserInput(event)}>
+                                            </input>
+                                            <span className="text text-danger">{this.state.mensagensValidacao['email']}</span>
+                                        </div>
+                                        <label className={"col-sm-2 control-label " + (this.state.mostrarLogin ? "": "hidden")} htmlFor="senha">Senha</label>
+                                        <div className={"col-sm-4 " + (this.state.mostrarLogin ? "": "hidden")}>
+                                            <input type="password"
+                                                className="form-control"
+                                                name="senha"
+                                                label="Senha"
+                                                value={this.state.senha}
+                                                onChange={(event) => this.handleUserInput(event)}>
+                                            </input>
+                                            <span className="text text-danger">{this.state.mensagensValidacao['senha']}</span>
+                                        </div>
+                                    </div>
 
-                            <div className={"form-group " + (this.state.mostrarLogin ? "": "hidden")}>
-                                <div className="col-sm-12">
-                                     <a className="btn btn-default"
-                                        name="enviar"
-                                        onClick={() => this.handleAutenticarClicked()}>
-                                        Entrar
-                                    </a>
+                                    <div className={"form-group " + (this.state.mostrarLogin ? "": "hidden")}>
+                                        <div className="col-sm-12">
+                                             <a className="btn btn-default"
+                                                name="enviar"
+                                                onClick={() => this.handleAutenticarClicked()}>
+                                                Entrar
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div className={"form-group " + (this.state.mostrarDetalhes ? "": "hidden")}>
+                                        <label className="col-sm-2 control-label" htmlFor="nome">Nome completo</label>
+                                        <div className="col-sm-10">
+                                            <input type="text"
+                                                className="form-control"
+                                                name="nome"
+                                                label="Nome"
+                                                value={this.state.nome}
+                                                onChange={(event) => this.handleUserInput(event)}/>
+                                            <span className="text text-danger">{this.state.mensagensValidacao['nome']}</span>
+                                        </div>
+                                    </div>
+                                    <div className={"form-group " + (this.state.mostrarDetalhes ? "": "hidden")}>
+                                        <label className="col-sm-2 control-label" htmlFor="telefone">Telefone</label>
+                                        <div className="col-sm-4">
+                                            <input type="text"
+                                                className="form-control"
+                                                name="telefone"
+                                                label="Telefone"
+                                                value={this.state.telefone}
+                                                onChange={(event) => this.handleUserInput(event)}/>
+                                            <span className="text text-danger">{this.state.mensagensValidacao['telefone']}</span>
+                                        </div>
+                                        <label className="col-sm-3 control-label" htmlFor="dataDeNascimento">Data de nascimento</label>
+                                        <div className="col-sm-3">
+                                            <input type="date"
+                                                className="form-control"
+                                                name="dataDeNascimento"
+                                                label="Data de nascimento"
+                                                value={this.state.dataDeNascimento}
+                                                onChange={(event) => this.handleUserInput(event)}>
+                                            </input>
+                                            <span className="text text-danger">{this.state.mensagensValidacao['dataDeNascimento']}</span>
+                                        </div>
+                                    </div>
+                                    <div className={"form-group " + (this.state.mostrarDetalhes ? "": "hidden")}>
+                                        <label className="col-sm-2 control-label" htmlFor="novaSenha">Nova senha</label>
+                                        <div className="col-sm-4">
+                                            <input type="password"
+                                                className="form-control"
+                                                name="novaSenha"
+                                                label="Nova senha"
+                                                value={this.state.novaSenha}
+                                                onChange={(event) => this.handleUserInput(event)}/>
+                                        </div>
+                                        <label className="col-sm-2 control-label" htmlFor="confirmarSenha">Confirme a senha nova</label>
+                                        <div className="col-sm-4">
+                                            <input type="password"
+                                                className="form-control"
+                                                name="confirmarSenha"
+                                                label="Confirmação de nova senha"
+                                                value={this.state.confirmarSenha}
+                                                onChange={(event) => this.handleUserInput(event)}/>
+                                        </div>
+                                    </div>
+                                    <div className={"form-group " + (this.state.mostrarDetalhes ? "": "hidden")}>
+                                        <div className="col-sm-12">
+                                             <a className="btn btn-default"
+                                                name="enviar"
+                                                onClick={() => this.handleEditarUsuarioClicked()}
+                                                >
+                                                Salvar
+                                            </a>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div className="tab-pane" id="meusPalpites">
+                            <h4 className={(this.state.mostrarDetalhes ? "": "hidden")}>Meus palpites</h4>
+                            <div className={"col-sm-12" + (this.state.mostrarDetalhes ? "": "hidden")}>
+                                <div className="content-section implementation">
+                                <DataTable value={this.state.palpites} paginator={true} rows={10}>
+                                    <Column field="campeao" header="Campeão" />
+                                    <Column field="vice" header="Vice" />
+                                </DataTable>
                                 </div>
                             </div>
-                            <div className={"form-group " + (this.state.mostrarDetalhes ? "": "hidden")}>
-                                <label className="col-sm-2 control-label" htmlFor="nome">Nome completo</label>
-                                <div className="col-sm-10">
-                                    <input type="text"
-                                        className="form-control"
-                                        name="nome"
-                                        label="Nome"
-                                        value={this.state.nome}
-                                        onChange={(event) => this.handleUserInput(event)}/>
-                                    <span className="text text-danger">{this.state.mensagensValidacao['nome']}</span>
-                                </div>
-                            </div>
-                            <div className={"form-group " + (this.state.mostrarDetalhes ? "": "hidden")}>
-                                <label className="col-sm-2 control-label" htmlFor="telefone">Telefone</label>
-                                <div className="col-sm-4">
-                                    <input type="text"
-                                        className="form-control"
-                                        name="telefone"
-                                        label="Telefone"
-                                        value={this.state.telefone}
-                                        onChange={(event) => this.handleUserInput(event)}/>
-                                    <span className="text text-danger">{this.state.mensagensValidacao['telefone']}</span>
-                                </div>
-                                <label className="col-sm-3 control-label" htmlFor="dataDeNascimento">Data de nascimento</label>
-                                <div className="col-sm-3">
-                                    <input type="date"
-                                        className="form-control"
-                                        name="dataDeNascimento"
-                                        label="Data de nascimento"
-                                        value={this.state.dataDeNascimento}
-                                        onChange={(event) => this.handleUserInput(event)}>
-                                    </input>
-                                    <span className="text text-danger">{this.state.mensagensValidacao['dataDeNascimento']}</span>
-                                </div>
-                            </div>
-                            <div className={"form-group " + (this.state.mostrarDetalhes ? "": "hidden")}>
-                                <label className="col-sm-2 control-label" htmlFor="novaSenha">Nova senha</label>
-                                <div className="col-sm-4">
-                                    <input type="password"
-                                        className="form-control"
-                                        name="novaSenha"
-                                        label="Nova senha"
-                                        value={this.state.novaSenha}
-                                        onChange={(event) => this.handleUserInput(event)}/>
-                                </div>
-                                <label className="col-sm-2 control-label" htmlFor="confirmarSenha">Confirme a senha nova</label>
-                                <div className="col-sm-4">
-                                    <input type="password"
-                                        className="form-control"
-                                        name="confirmarSenha"
-                                        label="Confirmação de nova senha"
-                                        value={this.state.confirmarSenha}
-                                        onChange={(event) => this.handleUserInput(event)}/>
-                                </div>
-                            </div>
-
-                            <div className={"form-group " + (this.state.mostrarDetalhes ? "": "hidden")}>
-                                <div className="col-sm-12">
-                                     <a className="btn btn-default"
-                                        name="enviar"
-                                        onClick={() => this.handleEditarUsuarioClicked()}
-                                        >
-                                        Salvar
-                                    </a>
-                                </div>
-                                <h4 className={(this.state.mostrarDetalhes ? "": "hidden")}>Meus palpites</h4>
-                                <div className="form-group">
-                                    <div className="content-section implementation">
-                                    <DataTable value={this.state.palpites} paginator={true} rows={10}>
-                                        <Column field="campeao" header="Campeão" />
-                                        <Column field="vice" header="Vice" />
-                                    </DataTable>
-                                </div>
-                                </div>
-                            </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
                 {this.state.mostrarAjaxLoader && (<div className='ajaxLoaderClass' />)}
